@@ -1,37 +1,29 @@
 import { useState } from "react";
-import { GAME_STATUS } from "./constants";
 import Equation from "./equation";
-import { useAccount, useCoState } from "jazz-react";
-import { JazzGame } from "./schema";
-import { ID } from "jazz-tools";
+import { useAccount } from "jazz-react";
 
 interface Props {
-  gameStatus: typeof GAME_STATUS;
+  score: number;
   onOver: () => void;
-  addHighestScore: (hs: number) => void;
+  onUpdateScore: (score: number) => void;
+  onAddHighestScore: (hs: number) => void;
 }
 
 export const Game: React.FC<Props> = (props) => {
   const [equation, setEquation] = useState(new Equation());
-  const [score, setScore] = useState(0);
-
-  //   const [highestScore, setHighestScore] = useState(40);
   const { me } = useAccount({ profile: {}, root: {} });
 
-  const [highestScore, setHighestScore] = useState<ID<JazzGame>>();
-
   const answeredCorrectly = () => {
-    const newscore = score + 1;
-    setScore(newscore);
+    const newscore = props.score + 1;
+    props.onUpdateScore(newscore);
     setEquation(new Equation());
   };
 
   const answeredIncorrectly = () => {
     props.onOver();
-    if (me && score > (me?.root.highScore || 0)) {
-      console.log(`= setting hs=`, score);
-      me.root.highScore = score;
-      props.addHighestScore(score);
+    if (me && props.score > (me?.root.highScore || 0)) {
+      me.root.highScore = props.score;
+      props.onAddHighestScore(props.score);
     }
   };
   const onTrueClick = () => {
@@ -84,7 +76,7 @@ export const Game: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className="text-center text-2xl">
-          <div className="text-yellow-500 my-8">Score - {score}</div>
+          <div className="text-yellow-500 my-8">Score - {props.score}</div>
           <div className="text-xl mb-2">
             Your High Score - {me.root.highScore}
           </div>

@@ -1,17 +1,17 @@
 import React from "react";
 import _sortBy from "lodash/sortBy";
 import { Leaderboard } from "./schema";
-import { useCoState } from "jazz-react";
 
 interface Props {
-  leaderboard: Leaderboard;
+  leaderboard?: Leaderboard;
 }
 
 const TopScores: React.FC<Props> = ({ leaderboard }) => {
-  const scores = useCoState(Leaderboard, leaderboard?.id, []);
-  const sortedScores = _sortBy(scores || [], "value").reverse();
-  console.log(`-- top-`, top);
+  if (!leaderboard) {
+    return null;
+  }
 
+  const sortedScores = _sortBy(leaderboard, "value").reverse();
   return (
     <div className="w-full max-w-sm mx-auto mt-2 p-4 bg-white rounded-lg shadow-md border border-gray-300">
       <h2 className="text-xl text-center text-yellow-500 font-semibold mb-3">

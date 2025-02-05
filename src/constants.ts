@@ -3,6 +3,7 @@ export const MIN_NUM = 1;
 export const TIMER_SEC = 3;
 export const TIMER_BASE = 10;
 export const TIMER_OFFSET = TIMER_SEC * TIMER_BASE;
+export const LEADERBOARD_ID = "co_zJSsJ8TdyxG9kZLajxRDQ6M5zWd";
 
 export const GAME_STATUS = {
   DEFAULT: "default", // not started (menu)
