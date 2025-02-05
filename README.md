@@ -1,6 +1,7 @@
 # Jazz Game
 
 Used starter template "React + Jazz + Demo Auth + Tailwind"
+
 Used parts of old game https://github.com/pnkapadia64/me-against-time
 
 ## Running locally

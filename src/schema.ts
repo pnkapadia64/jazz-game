@@ -3,16 +3,7 @@
  * https://jazz.tools/docs/react/schemas/covalues
  */
 
-import {
-  Account,
-  CoMap,
-  Group,
-  Profile,
-  co,
-  CoValue,
-  CoFeed,
-  CoList,
-} from "jazz-tools";
+import { Account, CoMap, Group, Profile, co, CoFeed } from "jazz-tools";
 
 /** The account profile is an app-specific per-user public `CoMap`
  *  where you can store top-level objects for that user */
@@ -29,16 +20,7 @@ export class JazzProfile extends Profile {
 /** The account root is an app-specific per-user private `CoMap`
  *  where you can store top-level objects for that user */
 export class AccountRoot extends CoMap {
-  dateOfBirth = co.Date;
   highScore = co.number;
-
-  // Add private fields here
-
-  get age() {
-    if (!this.dateOfBirth) return null;
-
-    return new Date().getFullYear() - this.dateOfBirth.getFullYear();
-  }
 }
 
 export class JazzAccount extends Account {
@@ -54,7 +36,6 @@ export class JazzAccount extends Account {
 
       this.root = AccountRoot.create(
         {
-          dateOfBirth: new Date("1/1/1990"),
           highScore: 0,
         },
         group
@@ -63,15 +44,11 @@ export class JazzAccount extends Account {
   }
 }
 
-export class JazzGame extends CoMap {
-  highestScore = co.number;
-}
-
 export class Leaderboard extends CoFeed.Of(co.number) {}
 
 export function createLeaderboard() {
   const group = Group.create();
-  group.addMember("everyone", "writer"); // everyone can push to the leaderboard
+  group.addMember("everyone", "writer");
   return Leaderboard.create([], group);
 }
 

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { useCoState } from "jazz-react";
+import { ID } from "jazz-tools";
 import { Game } from "./Game";
 import { GAME_STATUS, LEADERBOARD_ID } from "./constants";
 import DefaultScreen from "./DefaultGameScreen";
 import GameOverScreen from "./GameOverScreen";
 import { Leaderboard } from "./schema";
 import TopScores from "./TopScores";
-import { useCoState } from "jazz-react";
-import { ID } from "jazz-tools";
 
 interface Props {}
 

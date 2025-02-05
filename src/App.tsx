@@ -1,6 +1,5 @@
 import { useAccount } from "jazz-react";
 import { Logo } from "./Logo.tsx";
-import { Game } from "./Game.tsx";
 import GamePlayer from "./GamePlayer.tsx";
 
 function App() {

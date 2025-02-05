@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Equation from "./equation";
 import { useAccount } from "jazz-react";
+import Equation from "./equation";
 
 interface Props {
   score: number;
